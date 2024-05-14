@@ -4,22 +4,24 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
-@Table(name = "employeeTier")
+@Table(name = "employee_tier")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@ToString
 public class EmployeeTier {
 
     @Id
-    @Column(name = "tierId")
+    @Column(name = "tier_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tierId;
 
-    @Column(name = "tierName")
+    @Column(name = "tier_name")
     private String tierName;
 
-    @Column(name = "tierDescription")
+    @Column(name = "tier_description")
     private String tierDescription;
 }

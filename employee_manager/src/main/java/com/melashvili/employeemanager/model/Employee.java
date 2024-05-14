@@ -15,28 +15,28 @@ import lombok.ToString;
 public class Employee {
 
     @Id
-    @Column(name = "employeeId")
+    @Column(name = "employee_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long employeeId;
 
-    @Column(name = "employeeFirstName")
+    @Column(name = "employee_first_name")
     private String employeeFirstName;
 
-    @Column(name = "employeeLastName")
+    @Column(name = "employee_last_name")
     private String employeeLastName;
 
     @ManyToOne(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    @JoinColumn(name = "hireAdminId")
+            fetch = FetchType.EAGER)
+    @JoinColumn(name = "hire_admin_id")
     private Admin admin;
 
     @OneToOne(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    @JoinColumn(name = "sectorId")
+            fetch = FetchType.EAGER)
+    @JoinColumn(name = "sector_id")
     private Sector sector;
 
     @OneToOne(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    @JoinColumn(name = "tierId")
+            fetch = FetchType.EAGER)
+    @JoinColumn(name = "tier_id")
     private EmployeeTier tier;
 }

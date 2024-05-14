@@ -1,9 +1,7 @@
 package com.melashvili.employeemanager.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -12,27 +10,30 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@ToString
+@Builder
 public class Task {
 
     @Id
-    @Column(name = "taskId")
+    @Column(name = "task_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long taskId;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "adminId")
+    @JoinColumn(name = "admin_id")
     private Admin admin;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "employeeId")
+    @JoinTable(name = "employee_id")
     private List<Employee> employee;
 
-    @Column(name = "taskName")
+    @Column(name = "task_name")
     private String taskName;
 
-    @Column(name = "taskDescription")
+    @Column(name = "task_description")
     private String taskDescription;
 
-    @Column(name = "taskFile")
+    @Lob
+    @Column(name = "task_file", length = 4096)
     private byte[] taskFile;
 }

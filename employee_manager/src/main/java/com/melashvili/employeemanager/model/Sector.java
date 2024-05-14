@@ -4,21 +4,23 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "sector")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@ToString
 public class Sector {
     @Id
-    @Column(name = "sectorId")
+    @Column(name = "sector_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long sectorId;
 
-    @Column(name = "sectorName")
+    @Column(name = "sector_name")
     private String sectorName;
 
-    @Column(name = "sectorLocation")
+    @Column(name = "sector_location")
     private String sectorLocation;
 }

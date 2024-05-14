@@ -4,6 +4,7 @@ import com.melashvili.employeemanager.model.*;
 import com.melashvili.employeemanager.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -80,7 +81,19 @@ public class MainController {
 
     @PostMapping("/post/employees")
     public void saveEmployee(@RequestBody Employee employee) {
-        System.out.println(employee.toString());
+
+        Long adminId = employee.getAdmin().getAdminId();
+        Long sectorId = employee.getSector().getSectorId();
+        Long tierId = employee.getTier().getTierId();
+
+        Admin admin = adminId != null ? adminService.getAdminById(adminId) : null;
+        Sector sector = sectorId != null ? sectorService.getSectorById(sectorId) : null;
+        EmployeeTier tier = tierId != null ? employeeTierService.getEmployeeTierById(tierId) : null;
+
+        employee.setAdmin(admin);
+        employee.setSector(sector);
+        employee.setTier(tier);
+
         employeeService.addEmployee(employee);
     }
 
@@ -191,10 +204,14 @@ public class MainController {
         return taskService.getTaskById(id);
     }
 
-    @PostMapping("/post/task")
-    public void saveTask(@RequestBody Task task) {
-        taskService.saveTask(task);
-    }
+    // under construction ...
+//    @PostMapping("/post/task")
+//    public void saveTask(@RequestBody Task task) {
+//
+//        MultipartFile multipartFile = task.getTaskFile();
+//
+//        taskService.saveTask(task);
+//    }
 
     @PutMapping("/put/task/{id}")
     public void updateTask (@PathVariable Long id,

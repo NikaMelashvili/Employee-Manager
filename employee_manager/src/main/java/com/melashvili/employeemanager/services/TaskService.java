@@ -4,14 +4,16 @@ import com.melashvili.employeemanager.model.Task;
 import com.melashvili.employeemanager.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class TaskService {
-    private TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
 
     @Autowired
     public TaskService(TaskRepository taskRepository) {
@@ -32,7 +34,7 @@ public class TaskService {
         return taskRepository.findById(id).get();
     }
 
-    public void saveTask(Task task) {
+    public void saveTask(Task task, MultipartFile file) throws IOException {
         taskRepository.save(task);
     }
 

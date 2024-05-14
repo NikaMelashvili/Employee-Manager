@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class EmployeeTierService {
 
-    private EmployeeTierRepository employeeRepository;
+    private final EmployeeTierRepository employeeRepository;
 
     @Autowired
     public EmployeeTierService(EmployeeTierRepository employeeRepository) {

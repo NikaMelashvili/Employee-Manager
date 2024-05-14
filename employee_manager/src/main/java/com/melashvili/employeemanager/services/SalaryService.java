@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class SalaryService {
 
-    private SalaryRepository salaryRepository;
+    private final SalaryRepository salaryRepository;
 
     @Autowired
     public SalaryService(SalaryRepository salaryRepository) {
