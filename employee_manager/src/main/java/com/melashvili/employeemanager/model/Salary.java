@@ -16,6 +16,8 @@ public class Salary {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long salaryId;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employeeId")
     private Employee employee;
 
     @Column(name = "grossSalary")

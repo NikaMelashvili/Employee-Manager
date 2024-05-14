@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "employee")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@ToString
 public class Employee {
 
     @Id
@@ -23,9 +25,18 @@ public class Employee {
     @Column(name = "employeeLastName")
     private String employeeLastName;
 
+    @ManyToOne(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    @JoinColumn(name = "hireAdminId")
     private Admin admin;
 
+    @OneToOne(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    @JoinColumn(name = "sectorId")
     private Sector sector;
 
+    @OneToOne(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    @JoinColumn(name = "tierId")
     private EmployeeTier tier;
 }

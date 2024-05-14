@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "task")
 @NoArgsConstructor
@@ -17,9 +19,13 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long taskId;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "adminId")
     private Admin admin;
 
-    private Employee employee;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "employeeId")
+    private List<Employee> employee;
 
     @Column(name = "taskName")
     private String taskName;

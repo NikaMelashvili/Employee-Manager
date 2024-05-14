@@ -80,6 +80,7 @@ public class MainController {
 
     @PostMapping("/post/employees")
     public void saveEmployee(@RequestBody Employee employee) {
+        System.out.println(employee.toString());
         employeeService.addEmployee(employee);
     }
 
