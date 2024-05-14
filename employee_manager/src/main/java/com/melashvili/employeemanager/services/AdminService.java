@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdminService {
@@ -36,8 +37,21 @@ public class AdminService {
         adminRepository.save(admin);
     }
 
-    public void updateAdmin(Admin admin) {
-        adminRepository.save(admin);
+    public void updateAdminById(Long id, Admin updatedAdmin) {
+        Optional<Admin> optionalAdmin = adminRepository.findById(id);
+
+        if (optionalAdmin.isPresent()) {
+            Admin admin = optionalAdmin.get();
+
+            admin.setAdminFirstName(updatedAdmin.getAdminFirstName());
+            admin.setAdminLastName(updatedAdmin.getAdminLastName());
+            admin.setAdminEmail(updatedAdmin.getAdminEmail());
+            admin.setAdminPassword(updatedAdmin.getAdminPassword());
+
+            adminRepository.save(admin);
+        } else {
+            System.out.println("Admin not found");
+        }
     }
 
     public void deleteAdminById(Long id) {

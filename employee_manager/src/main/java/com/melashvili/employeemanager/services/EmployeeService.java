@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -20,12 +21,12 @@ public class EmployeeService {
 
     public List<Employee> getAllEmployees() {
         Iterable<Employee> temp = employeeRepository.findAll();
-        List<Employee> admins = new ArrayList<>();
+        List<Employee> employees = new ArrayList<>();
         for (Employee employee : temp) {
-            admins.add(employee);
+            employees.add(employee);
             System.out.println(employee.toString());
         }
-        return admins;
+        return employees;
     }
 
     public Employee getEmployeeById(Long id) {
@@ -36,8 +37,22 @@ public class EmployeeService {
         employeeRepository.save(employee);
     }
 
-    public void updateEmployee(Employee employee) {
-        employeeRepository.save(employee);
+    public void updateEmployeeById(Long id, Employee updatedEmployee) {
+        Optional<Employee> employeeOptional = employeeRepository.findById(id);
+
+        if(employeeOptional.isPresent()) {
+            Employee employeeToUpdate = employeeOptional.get();
+
+            employeeToUpdate.setEmployeeFirstName(updatedEmployee.getEmployeeFirstName());
+            employeeToUpdate.setEmployeeLastName(updatedEmployee.getEmployeeLastName());
+            employeeToUpdate.setAdmin(updatedEmployee.getAdmin());
+            employeeToUpdate.setSector(updatedEmployee.getSector());
+            employeeToUpdate.setTier(updatedEmployee.getTier());
+
+            employeeRepository.save(employeeToUpdate);
+        } else {
+            System.out.println("Employee not found");
+        }
     }
 
     public void deleteEmployeeById(Long id) {
