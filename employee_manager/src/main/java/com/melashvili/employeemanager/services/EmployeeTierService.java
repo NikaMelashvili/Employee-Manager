@@ -1,6 +1,6 @@
 package com.melashvili.employeemanager.services;
 
-import com.melashvili.employeemanager.model.EmployeeTier;
+import com.melashvili.employeemanager.model.lib.EmployeeTier;
 import com.melashvili.employeemanager.repository.EmployeeTierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

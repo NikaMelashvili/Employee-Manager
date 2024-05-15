@@ -1,6 +1,6 @@
 package com.melashvili.employeemanager.repository;
 
-import com.melashvili.employeemanager.model.Sector;
+import com.melashvili.employeemanager.model.lib.Sector;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

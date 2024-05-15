@@ -1,12 +1,11 @@
 package com.melashvili.employeemanager.controllers;
 
-import com.melashvili.employeemanager.model.*;
+import com.melashvili.employeemanager.model.lib.*;
 import com.melashvili.employeemanager.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -58,7 +57,7 @@ public class MainController {
     @PostMapping("/post/admin")
     public ResponseEntity<Void> saveAdmin(@RequestBody Admin admin) {
         adminService.addAdmin(admin);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/put/admin/{id}")
@@ -71,7 +70,7 @@ public class MainController {
     @DeleteMapping("/delete/admin/{id}")
     public ResponseEntity<Void> deleteAdminById(@PathVariable Long id) {
         adminService.deleteAdminById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     // employees section
@@ -104,7 +103,7 @@ public class MainController {
         employee.setTier(tier);
 
         employeeService.addEmployee(employee);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/put/employees/{id}")
@@ -117,7 +116,7 @@ public class MainController {
     @DeleteMapping("/delete/employees/{id}")
     public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
         employeeService.deleteEmployeeById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     // employees tier section
@@ -137,7 +136,7 @@ public class MainController {
     @PostMapping("/post/tiers")
     public ResponseEntity<Void> addEmployeeTier(@RequestBody EmployeeTier employeeTier) {
         employeeTierService.addEmployeeTier(employeeTier);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/put/tiers/{id}")
@@ -150,7 +149,7 @@ public class MainController {
     @DeleteMapping("/delete/tiers/{id}")
     public ResponseEntity<Void> deleteEmployeeTier(@PathVariable Long id) {
         employeeTierService.deleteEmployeeTierById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     // salary section
@@ -170,7 +169,7 @@ public class MainController {
     @PostMapping("/post/salary")
     public ResponseEntity<Void> addSalary(@RequestBody Salary salary){
         salaryService.saveSalary(salary);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/put/salary/{id}")
@@ -183,7 +182,7 @@ public class MainController {
     @DeleteMapping("/delete/salary/{id}")
     public ResponseEntity<Void> deleteSalary(@PathVariable Long id){
         salaryService.deleteSalaryById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     // sectors section
@@ -203,7 +202,7 @@ public class MainController {
     @PostMapping("/post/sector")
     public ResponseEntity<Void> saveSector(@RequestBody Sector sector) {
         sectorService.addSector(sector);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/put/sector/{id}")
@@ -216,7 +215,7 @@ public class MainController {
     @DeleteMapping("/delete/sector/{id}")
     public ResponseEntity<Void> deleteSector(@PathVariable Long id) {
         sectorService.deleteSectorById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     // task section
@@ -252,6 +251,6 @@ public class MainController {
     @DeleteMapping("/delete/task/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
         taskService.deleteTaskById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

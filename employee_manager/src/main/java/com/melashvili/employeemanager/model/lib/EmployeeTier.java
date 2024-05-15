@@ -1,4 +1,4 @@
-package com.melashvili.employeemanager.model;
+package com.melashvili.employeemanager.model.lib;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

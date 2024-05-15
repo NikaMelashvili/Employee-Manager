@@ -1,6 +1,6 @@
 package com.melashvili.employeemanager.services;
 
-import com.melashvili.employeemanager.model.Sector;
+import com.melashvili.employeemanager.model.lib.Sector;
 import com.melashvili.employeemanager.repository.SectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

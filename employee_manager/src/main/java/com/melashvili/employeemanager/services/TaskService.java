@@ -1,6 +1,6 @@
 package com.melashvili.employeemanager.services;
 
-import com.melashvili.employeemanager.model.Task;
+import com.melashvili.employeemanager.model.lib.Task;
 import com.melashvili.employeemanager.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
