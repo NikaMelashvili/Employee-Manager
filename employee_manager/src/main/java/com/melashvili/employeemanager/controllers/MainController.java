@@ -3,6 +3,8 @@ package com.melashvili.employeemanager.controllers;
 import com.melashvili.employeemanager.model.*;
 import com.melashvili.employeemanager.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,45 +44,52 @@ public class MainController {
     // admins section
 
     @GetMapping("/get/admin")
-    public List<Admin> getAdmins() {
-        return adminService.getAllAdmins();
+    public ResponseEntity<List<Admin>> getAdmins() {
+        List<Admin> admins = adminService.getAllAdmins();
+        return new ResponseEntity<>(admins, HttpStatus.OK);
     }
 
     @GetMapping("/get/admin/{id}")
-    public Admin getAdmin(@PathVariable Long id) {
-        return adminService.getAdminById(id);
+    public ResponseEntity<Admin> getAdmin(@PathVariable Long id) {
+        Admin admin = adminService.getAdminById(id);
+        return new ResponseEntity<>(admin, HttpStatus.OK);
     }
 
     @PostMapping("/post/admin")
-    public void saveAdmin(@RequestBody Admin admin) {
+    public ResponseEntity<Void> saveAdmin(@RequestBody Admin admin) {
         adminService.addAdmin(admin);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/put/admin/{id}")
-    public void updateAdmin(@PathVariable Long id,
+    public ResponseEntity<Void> updateAdmin(@PathVariable Long id,
                             @RequestBody Admin admin) {
         adminService.updateAdminById(id, admin);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/admin/{id}")
-    public void deleteAdminById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteAdminById(@PathVariable Long id) {
         adminService.deleteAdminById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // employees section
 
     @GetMapping("/get/employees")
-    public List<Employee> getAllEmployees() {
-        return employeeService.getAllEmployees();
+    public ResponseEntity<List<Employee>> getAllEmployees() {
+        List<Employee> employees = employeeService.getAllEmployees();
+        return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
     @GetMapping("/get/employees/{id}")
-    public Employee getEmployeeById(@PathVariable Long id) {
-        return employeeService.getEmployeeById(id);
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
+        Employee employee = employeeService.getEmployeeById(id);
+        return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
     @PostMapping("/post/employees")
-    public void saveEmployee(@RequestBody Employee employee) {
+    public ResponseEntity<Void> saveEmployee(@RequestBody Employee employee) {
 
         Long adminId = employee.getAdmin().getAdminId();
         Long sectorId = employee.getSector().getSectorId();
@@ -95,113 +104,133 @@ public class MainController {
         employee.setTier(tier);
 
         employeeService.addEmployee(employee);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/put/employees/{id}")
-    public void updateEmployee(@PathVariable Long id,
+    public ResponseEntity<Void> updateEmployee(@PathVariable Long id,
                                @RequestBody Employee employee) {
         employeeService.updateEmployeeById(id, employee);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/employees/{id}")
-    public void deleteEmployee(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
         employeeService.deleteEmployeeById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // employees tier section
 
     @GetMapping("/get/tiers")
-    public List<EmployeeTier> getAllEmployeeTiers() {
-        return employeeTierService.getAllEmployeeTiers();
+    public ResponseEntity<List<EmployeeTier>> getAllEmployeeTiers() {
+        List<EmployeeTier> tiers = employeeTierService.getAllEmployeeTiers();
+        return new ResponseEntity<>(tiers, HttpStatus.OK);
     }
 
     @GetMapping("/get/tiers/{id}")
-    public EmployeeTier getEmployeeTierById(@PathVariable Long id) {
-        return employeeTierService.getEmployeeTierById(id);
+    public ResponseEntity<EmployeeTier> getEmployeeTierById(@PathVariable Long id) {
+        EmployeeTier tier = employeeTierService.getEmployeeTierById(id);
+        return new ResponseEntity<>(tier, HttpStatus.OK);
     }
 
     @PostMapping("/post/tiers")
-    public void addEmployeeTier(@RequestBody EmployeeTier employeeTier) {
+    public ResponseEntity<Void> addEmployeeTier(@RequestBody EmployeeTier employeeTier) {
         employeeTierService.addEmployeeTier(employeeTier);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/put/tiers/{id}")
-    public void updateTier(@PathVariable Long id,
+    public ResponseEntity<Void> updateTier(@PathVariable Long id,
                            @RequestBody EmployeeTier employeeTier) {
         employeeTierService.updateEmployeeTierById(id, employeeTier);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/tiers/{id}")
-    public void deleteEmployeeTier(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteEmployeeTier(@PathVariable Long id) {
         employeeTierService.deleteEmployeeTierById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // salary section
 
     @GetMapping("/get/salary")
-    public List<Salary> getAllSalaries(){
-        return salaryService.getAllSalaries();
+    public ResponseEntity<List<Salary>> getAllSalaries(){
+        List<Salary> salaries = salaryService.getAllSalaries();
+        return new ResponseEntity<>(salaries, HttpStatus.OK);
     }
 
     @GetMapping("/get/salary/{id}")
-    public Salary getSalaryById(@PathVariable Long id){
-        return salaryService.getSalaryById(id);
+    public ResponseEntity<Salary> getSalaryById(@PathVariable Long id){
+        Salary salary = salaryService.getSalaryById(id);
+        return new ResponseEntity<>(salary, HttpStatus.OK);
     }
 
     @PostMapping("/post/salary")
-    public void addSalary(@RequestBody Salary salary){
+    public ResponseEntity<Void> addSalary(@RequestBody Salary salary){
         salaryService.saveSalary(salary);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/put/salary/{id}")
-    public void updateSalary(@PathVariable Long id,
+    public ResponseEntity<Void> updateSalary(@PathVariable Long id,
                              @RequestBody Salary salary){
         salaryService.updateSalaryById(id, salary);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/salary/{id}")
-    public void deleteSalary(@PathVariable Long id){
+    public ResponseEntity<Void> deleteSalary(@PathVariable Long id){
         salaryService.deleteSalaryById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // sectors section
 
     @GetMapping("/get/sector")
-    public List<Sector> getAllSectors(){
-        return sectorService.getAllSectors();
+    public ResponseEntity<List<Sector>> getAllSectors(){
+        List<Sector> sectors = sectorService.getAllSectors();
+        return new ResponseEntity<>(sectors, HttpStatus.OK);
     }
 
     @GetMapping("/get/sector/{id}")
-    public Sector getSectorById(@PathVariable Long id){
-        return sectorService.getSectorById(id);
+    public ResponseEntity<Sector> getSectorById(@PathVariable Long id){
+        Sector sector = sectorService.getSectorById(id);
+        return new ResponseEntity<>(sector, HttpStatus.OK);
     }
 
     @PostMapping("/post/sector")
-    public void saveSector(@RequestBody Sector sector) {
+    public ResponseEntity<Void> saveSector(@RequestBody Sector sector) {
         sectorService.addSector(sector);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/put/sector/{id}")
-    public void updateSector(@PathVariable Long id,
+    public ResponseEntity<Void> updateSector(@PathVariable Long id,
                              @RequestBody Sector sector) {
         sectorService.updateSector(id, sector);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/sector/{id}")
-    public void deleteSector(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteSector(@PathVariable Long id) {
         sectorService.deleteSectorById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // task section
 
     @GetMapping("/get/task")
-    public List<Task> getAllTasks(){
-        return taskService.getAllTasks();
+    public ResponseEntity<List<Task>> getAllTasks(){
+        List<Task> tasks = taskService.getAllTasks();
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
     @GetMapping("/get/task/{id}")
-    public Task getTaskById(@PathVariable Long id){
-        return taskService.getTaskById(id);
+    public ResponseEntity<Task> getTaskById(@PathVariable Long id){
+        Task task = taskService.getTaskById(id);
+        return new ResponseEntity<>(task, HttpStatus.OK);
     }
 
     // under construction ...
@@ -214,13 +243,15 @@ public class MainController {
 //    }
 
     @PutMapping("/put/task/{id}")
-    public void updateTask (@PathVariable Long id,
+    public ResponseEntity<Void> updateTask (@PathVariable Long id,
                             @RequestBody Task task) {
         taskService.updateTaskById(id, task);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/task/{id}")
-    public void deleteTask(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
         taskService.deleteTaskById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
