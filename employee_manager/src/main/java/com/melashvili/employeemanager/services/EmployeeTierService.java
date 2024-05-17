@@ -1,6 +1,8 @@
 package com.melashvili.employeemanager.services;
 
+import com.melashvili.employeemanager.model.dto.EmployeeTierDTO;
 import com.melashvili.employeemanager.model.lib.EmployeeTier;
+import com.melashvili.employeemanager.model.mapper.EmployeeTierMapper;
 import com.melashvili.employeemanager.repository.EmployeeTierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,25 +21,29 @@ public class EmployeeTierService {
         this.employeeRepository = employeeRepository;
     }
 
-    public List<EmployeeTier> getAllEmployeeTiers() {
+    public List<EmployeeTierDTO> getAllEmployeeTiers() {
         Iterable<EmployeeTier> temp = employeeRepository.findAll();
         List<EmployeeTier> tiers = new ArrayList<>();
         for (EmployeeTier tier : temp) {
             tiers.add(tier);
             System.out.println(tier.toString());
         }
-        return tiers;
+        List<EmployeeTierDTO> employeeTierDTOS = new ArrayList<>();
+        for (EmployeeTier tier : tiers) {
+            employeeTierDTOS.add(EmployeeTierMapper.employeeTierToDto(tier));
+        }
+        return employeeTierDTOS;
     }
 
-    public EmployeeTier getEmployeeTierById(Long id) {
-        return employeeRepository.findById(id).orElse(null);
+    public EmployeeTierDTO getEmployeeTierById(Long id) {
+        return EmployeeTierMapper.employeeTierToDto(employeeRepository.findById(id).orElse(null));
     }
 
-    public void addEmployeeTier(EmployeeTier employeeTier) {
-        employeeRepository.save(employeeTier);
+    public void addEmployeeTier(EmployeeTierDTO employeeTier) {
+        employeeRepository.save(EmployeeTierMapper.dtoToEmployeeTier(employeeTier));
     }
 
-    public void updateEmployeeTierById(Long id, EmployeeTier updatedEmployeeTier) {
+    public void updateEmployeeTierById(Long id, EmployeeTierDTO updatedEmployeeTier) {
         Optional<EmployeeTier> tierOptional = employeeRepository.findById(id);
 
         if (tierOptional.isPresent()) {

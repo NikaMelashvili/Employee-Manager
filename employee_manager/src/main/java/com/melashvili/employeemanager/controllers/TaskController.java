@@ -1,5 +1,6 @@
 package com.melashvili.employeemanager.controllers;
 
+import com.melashvili.employeemanager.model.dto.TaskDTO;
 import com.melashvili.employeemanager.model.lib.Task;
 import com.melashvili.employeemanager.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +22,14 @@ public class TaskController {
     }
 
     @GetMapping("/get/task")
-    public ResponseEntity<List<Task>> getAllTasks(){
-        List<Task> tasks = taskService.getAllTasks();
+    public ResponseEntity<List<TaskDTO>> getAllTasks(){
+        List<TaskDTO> tasks = taskService.getAllTasks();
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
     @GetMapping("/get/task/{id}")
-    public ResponseEntity<Task> getTaskById(@PathVariable Long id){
-        Task task = taskService.getTaskById(id);
+    public ResponseEntity<TaskDTO> getTaskById(@PathVariable Long id){
+        TaskDTO task = taskService.getTaskById(id);
         return new ResponseEntity<>(task, HttpStatus.OK);
     }
 
@@ -43,7 +44,7 @@ public class TaskController {
 
     @PutMapping("/put/task/{id}")
     public ResponseEntity<Void> updateTask (@PathVariable Long id,
-                                            @RequestBody Task task) {
+                                            @RequestBody TaskDTO task) {
         taskService.updateTaskById(id, task);
         return new ResponseEntity<>(HttpStatus.OK);
     }

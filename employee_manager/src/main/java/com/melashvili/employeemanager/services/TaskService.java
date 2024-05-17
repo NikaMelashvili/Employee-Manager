@@ -1,6 +1,8 @@
 package com.melashvili.employeemanager.services;
 
+import com.melashvili.employeemanager.model.dto.TaskDTO;
 import com.melashvili.employeemanager.model.lib.Task;
+import com.melashvili.employeemanager.model.mapper.TaskMapper;
 import com.melashvili.employeemanager.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,25 +22,29 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public List<Task> getAllTasks() {
+    public List<TaskDTO> getAllTasks() {
         Iterable<Task> temp = taskRepository.findAll();
         List<Task> tasks = new ArrayList<>();
         for (Task task : temp) {
             tasks.add(task);
             System.out.println(task.toString());
         }
-        return tasks;
+        List<TaskDTO> taskDTOS = new ArrayList<>();
+        for (Task task : tasks) {
+            taskDTOS.add(TaskMapper.taskToDto(task));
+        }
+        return taskDTOS;
     }
 
-    public Task getTaskById(Long id) {
-        return taskRepository.findById(id).get();
+    public TaskDTO getTaskById(Long id) {
+        return TaskMapper.taskToDto(taskRepository.findById(id).get());
     }
 
     public void saveTask(Task task, MultipartFile file) throws IOException {
         taskRepository.save(task);
     }
 
-    public void updateTaskById(Long id, Task updatedTask) {
+    public void updateTaskById(Long id, TaskDTO updatedTask) {
         Optional<Task> taskOptional = taskRepository.findById(id);
 
         if (taskOptional.isPresent()) {

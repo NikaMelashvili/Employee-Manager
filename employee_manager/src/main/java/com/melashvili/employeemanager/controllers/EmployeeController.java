@@ -1,5 +1,9 @@
 package com.melashvili.employeemanager.controllers;
 
+import com.melashvili.employeemanager.model.dto.AdminDTO;
+import com.melashvili.employeemanager.model.dto.EmployeeDTO;
+import com.melashvili.employeemanager.model.dto.EmployeeTierDTO;
+import com.melashvili.employeemanager.model.dto.SectorDTO;
 import com.melashvili.employeemanager.model.lib.Admin;
 import com.melashvili.employeemanager.model.lib.Employee;
 import com.melashvili.employeemanager.model.lib.EmployeeTier;
@@ -19,23 +23,11 @@ import java.util.List;
 @RequestMapping("/api")
 public class EmployeeController {
 
-    private final AdminService adminService;
-
-    private final EmployeeService employeeService;
-
-    private final SectorService sectorService;
-
-    private final EmployeeTierService employeeTierService;
+    private EmployeeService employeeService;
 
     @Autowired
-    public EmployeeController(AdminService adminService,
-                              EmployeeService employeeService,
-                              SectorService sectorService,
-                              EmployeeTierService employeeTierService) {
-        this.adminService = adminService;
+    public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
-        this.sectorService = sectorService;
-        this.employeeTierService = employeeTierService;
     }
 
     @GetMapping("/get/employees")
@@ -51,20 +43,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/post/employees")
-    public ResponseEntity<Void> saveEmployee(@RequestBody Employee employee) {
-
-        Long adminId = employee.getAdmin().getAdminId();
-        Long sectorId = employee.getSector().getSectorId();
-        Long tierId = employee.getTier().getTierId();
-
-        Admin admin = adminId != null ? adminService.getAdminById(adminId) : null;
-        Sector sector = sectorId != null ? sectorService.getSectorById(sectorId) : null;
-        EmployeeTier tier = tierId != null ? employeeTierService.getEmployeeTierById(tierId) : null;
-
-        employee.setAdmin(admin);
-        employee.setSector(sector);
-        employee.setTier(tier);
-
+    public ResponseEntity<Void> saveEmployee(@RequestBody EmployeeDTO employee) {
         employeeService.addEmployee(employee);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

@@ -1,6 +1,8 @@
 package com.melashvili.employeemanager.services;
 
+import com.melashvili.employeemanager.model.dto.SalaryDTO;
 import com.melashvili.employeemanager.model.lib.Salary;
+import com.melashvili.employeemanager.model.mapper.SalaryMapper;
 import com.melashvili.employeemanager.repository.SalaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,25 +21,29 @@ public class SalaryService {
         this.salaryRepository = salaryRepository;
     }
 
-    public List<Salary> getAllSalaries() {
+    public List<SalaryDTO> getAllSalaries() {
         Iterable<Salary> temp = salaryRepository.findAll();
         List<Salary> salaries = new ArrayList<>();
         for (Salary salary : temp) {
             salaries.add(salary);
             System.out.println(salary.toString());
         }
-        return salaries;
+        List<SalaryDTO> salariesDTOs = new ArrayList<>();
+        for (Salary salary : salaries) {
+            salariesDTOs.add(SalaryMapper.salaryToDto(salary));
+        }
+        return salariesDTOs;
     }
 
-    public Salary getSalaryById(Long id) {
-        return salaryRepository.findById(id).get();
+    public SalaryDTO getSalaryById(Long id) {
+        return SalaryMapper.salaryToDto(salaryRepository.findById(id).get());
     }
 
-    public void saveSalary(Salary salary) {
-        salaryRepository.save(salary);
+    public void saveSalary(SalaryDTO salary) {
+        salaryRepository.save(SalaryMapper.dtoToSalary(salary));
     }
 
-    public void updateSalaryById(Long id, Salary updatedSalary) {
+    public void updateSalaryById(Long id, SalaryDTO updatedSalary) {
         Optional<Salary> salaryOptional = salaryRepository.findById(id);
 
         if (salaryOptional.isPresent()) {

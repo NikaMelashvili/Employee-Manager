@@ -1,5 +1,6 @@
 package com.melashvili.employeemanager.controllers;
 
+import com.melashvili.employeemanager.model.dto.SectorDTO;
 import com.melashvili.employeemanager.model.lib.Sector;
 import com.melashvili.employeemanager.services.SectorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,26 +22,26 @@ public class SectorController {
     }
 
     @GetMapping("/get/sector")
-    public ResponseEntity<List<Sector>> getAllSectors(){
-        List<Sector> sectors = sectorService.getAllSectors();
+    public ResponseEntity<List<SectorDTO>> getAllSectors(){
+        List<SectorDTO> sectors = sectorService.getAllSectors();
         return new ResponseEntity<>(sectors, HttpStatus.OK);
     }
 
     @GetMapping("/get/sector/{id}")
-    public ResponseEntity<Sector> getSectorById(@PathVariable Long id){
-        Sector sector = sectorService.getSectorById(id);
+    public ResponseEntity<SectorDTO> getSectorById(@PathVariable Long id){
+        SectorDTO sector = sectorService.getSectorById(id);
         return new ResponseEntity<>(sector, HttpStatus.OK);
     }
 
     @PostMapping("/post/sector")
-    public ResponseEntity<Void> saveSector(@RequestBody Sector sector) {
+    public ResponseEntity<Void> saveSector(@RequestBody SectorDTO sector) {
         sectorService.addSector(sector);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/put/sector/{id}")
     public ResponseEntity<Void> updateSector(@PathVariable Long id,
-                                             @RequestBody Sector sector) {
+                                             @RequestBody SectorDTO sector) {
         sectorService.updateSector(id, sector);
         return new ResponseEntity<>(HttpStatus.OK);
     }

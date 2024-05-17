@@ -1,5 +1,6 @@
 package com.melashvili.employeemanager.controllers;
 
+import com.melashvili.employeemanager.model.dto.EmployeeTierDTO;
 import com.melashvili.employeemanager.model.lib.EmployeeTier;
 import com.melashvili.employeemanager.services.EmployeeTierService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,26 +22,26 @@ public class EmployeeTierController {
     }
 
     @GetMapping("/get/tiers")
-    public ResponseEntity<List<EmployeeTier>> getAllEmployeeTiers() {
-        List<EmployeeTier> tiers = employeeTierService.getAllEmployeeTiers();
+    public ResponseEntity<List<EmployeeTierDTO>> getAllEmployeeTiers() {
+        List<EmployeeTierDTO> tiers = employeeTierService.getAllEmployeeTiers();
         return new ResponseEntity<>(tiers, HttpStatus.OK);
     }
 
     @GetMapping("/get/tiers/{id}")
-    public ResponseEntity<EmployeeTier> getEmployeeTierById(@PathVariable Long id) {
-        EmployeeTier tier = employeeTierService.getEmployeeTierById(id);
+    public ResponseEntity<EmployeeTierDTO> getEmployeeTierById(@PathVariable Long id) {
+        EmployeeTierDTO tier = employeeTierService.getEmployeeTierById(id);
         return new ResponseEntity<>(tier, HttpStatus.OK);
     }
 
     @PostMapping("/post/tiers")
-    public ResponseEntity<Void> addEmployeeTier(@RequestBody EmployeeTier employeeTier) {
+    public ResponseEntity<Void> addEmployeeTier(@RequestBody EmployeeTierDTO employeeTier) {
         employeeTierService.addEmployeeTier(employeeTier);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/put/tiers/{id}")
     public ResponseEntity<Void> updateTier(@PathVariable Long id,
-                                           @RequestBody EmployeeTier employeeTier) {
+                                           @RequestBody EmployeeTierDTO employeeTier) {
         employeeTierService.updateEmployeeTierById(id, employeeTier);
         return new ResponseEntity<>(HttpStatus.OK);
     }
