@@ -1,7 +1,6 @@
 package com.melashvili.employeemanager.controllers;
 
 import com.melashvili.employeemanager.model.dto.TaskDTO;
-import com.melashvili.employeemanager.model.lib.Task;
 import com.melashvili.employeemanager.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,10 +1,7 @@
 package com.melashvili.employeemanager.services;
 
-import com.melashvili.employeemanager.model.dto.AdminDTO;
 import com.melashvili.employeemanager.model.dto.SectorDTO;
-import com.melashvili.employeemanager.model.lib.Admin;
 import com.melashvili.employeemanager.model.lib.Sector;
-import com.melashvili.employeemanager.model.mapper.AdminMapper;
 import com.melashvili.employeemanager.model.mapper.SectorMapper;
 import com.melashvili.employeemanager.repository.SectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;

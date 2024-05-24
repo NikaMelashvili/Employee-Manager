@@ -1,7 +1,6 @@
 package com.melashvili.employeemanager.controllers;
 
 import com.melashvili.employeemanager.model.dto.SectorDTO;
-import com.melashvili.employeemanager.model.lib.Sector;
 import com.melashvili.employeemanager.services.SectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

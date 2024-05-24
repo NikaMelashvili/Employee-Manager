@@ -1,17 +1,8 @@
 package com.melashvili.employeemanager.controllers;
 
-import com.melashvili.employeemanager.model.dto.AdminDTO;
 import com.melashvili.employeemanager.model.dto.EmployeeDTO;
-import com.melashvili.employeemanager.model.dto.EmployeeTierDTO;
-import com.melashvili.employeemanager.model.dto.SectorDTO;
-import com.melashvili.employeemanager.model.lib.Admin;
 import com.melashvili.employeemanager.model.lib.Employee;
-import com.melashvili.employeemanager.model.lib.EmployeeTier;
-import com.melashvili.employeemanager.model.lib.Sector;
-import com.melashvili.employeemanager.services.AdminService;
 import com.melashvili.employeemanager.services.EmployeeService;
-import com.melashvili.employeemanager.services.EmployeeTierService;
-import com.melashvili.employeemanager.services.SectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

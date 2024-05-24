@@ -1,7 +1,6 @@
 package com.melashvili.employeemanager.controllers;
 
 import com.melashvili.employeemanager.model.dto.SalaryDTO;
-import com.melashvili.employeemanager.model.lib.Salary;
 import com.melashvili.employeemanager.services.SalaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

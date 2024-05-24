@@ -1,9 +1,6 @@
 package com.melashvili.employeemanager.services;
 
-import com.melashvili.employeemanager.model.dto.AdminDTO;
 import com.melashvili.employeemanager.model.dto.EmployeeDTO;
-import com.melashvili.employeemanager.model.dto.EmployeeTierDTO;
-import com.melashvili.employeemanager.model.dto.SectorDTO;
 import com.melashvili.employeemanager.model.lib.Admin;
 import com.melashvili.employeemanager.model.lib.Employee;
 import com.melashvili.employeemanager.model.lib.EmployeeTier;
