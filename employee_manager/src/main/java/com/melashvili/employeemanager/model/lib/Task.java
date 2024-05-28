@@ -33,7 +33,8 @@ public class Task {
     @Column(name = "task_description")
     private String taskDescription;
 
-    @Lob
-    @Column(name = "task_file", length = 4096)
-    private byte[] taskFile;
+    @OneToOne(fetch = FetchType.EAGER,
+                cascade = CascadeType.ALL)
+    @JoinColumn(name = "task_file")
+    private TaskImage taskImage;
 }

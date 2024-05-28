@@ -12,5 +12,5 @@ public class TaskDTO {
     private List<Employee> employee;
     private String taskName;
     private String taskDescription;
-    private byte[] taskFile;
+    private Long taskImage;
 }

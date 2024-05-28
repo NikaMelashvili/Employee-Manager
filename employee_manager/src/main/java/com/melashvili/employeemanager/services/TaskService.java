@@ -2,6 +2,7 @@ package com.melashvili.employeemanager.services;
 
 import com.melashvili.employeemanager.model.dto.TaskDTO;
 import com.melashvili.employeemanager.model.lib.Task;
+import com.melashvili.employeemanager.model.lib.TaskImage;
 import com.melashvili.employeemanager.model.mapper.TaskMapper;
 import com.melashvili.employeemanager.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,21 +41,33 @@ public class TaskService {
         return TaskMapper.taskToDto(taskRepository.findById(id).get());
     }
 
-    public void saveTask(Task task, MultipartFile file) throws IOException {
+    public void saveTask(TaskDTO userTask, MultipartFile file) throws IOException {
+        Task task = new Task();
+        TaskImage taskImage = new TaskImage();
+        taskImage.setImageName(file.getOriginalFilename());
+        taskImage.setImageData(file.getBytes());
+        task.setTaskImage(taskImage);
+        task.setAdmin(userTask.getAdmin());
+        task.setEmployee(userTask.getEmployee());
+        task.setTaskName(userTask.getTaskName());
+        task.setTaskDescription(userTask.getTaskDescription());
         taskRepository.save(task);
     }
 
-    public void updateTaskById(Long id, TaskDTO updatedTask) {
+    public void updateTaskById(Long id, TaskDTO updatedTask, MultipartFile file) throws IOException {
         Optional<Task> taskOptional = taskRepository.findById(id);
 
         if (taskOptional.isPresent()) {
             Task task = taskOptional.get();
+            TaskImage taskImage = new TaskImage();
+            taskImage.setImageName(file.getOriginalFilename());
+            taskImage.setImageData(file.getBytes());
 
+            task.setAdmin(updatedTask.getAdmin());
+            task.setEmployee(updatedTask.getEmployee());
             task.setTaskName(updatedTask.getTaskName());
             task.setTaskDescription(updatedTask.getTaskDescription());
-            task.setEmployee(updatedTask.getEmployee());
-            task.setAdmin(updatedTask.getAdmin());
-            task.setTaskFile(updatedTask.getTaskFile());
+            task.setTaskImage(taskImage);
 
             taskRepository.save(task);
         } else {

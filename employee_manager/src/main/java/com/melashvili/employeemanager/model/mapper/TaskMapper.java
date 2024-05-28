@@ -14,7 +14,6 @@ public class TaskMapper {
         task.setTaskDescription(dto.getTaskDescription());
         task.setAdmin(dto.getAdmin());
         task.setEmployee(dto.getEmployee());
-        task.setTaskFile(dto.getTaskFile());
 
         return task;
     }
@@ -26,7 +25,6 @@ public class TaskMapper {
         dto.setTaskDescription(task.getTaskDescription());
         dto.setAdmin(task.getAdmin());
         dto.setEmployee(task.getEmployee());
-        dto.setTaskFile(task.getTaskFile());
 
         return dto;
     }

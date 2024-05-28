@@ -1,12 +1,15 @@
 package com.melashvili.employeemanager.controllers;
 
 import com.melashvili.employeemanager.model.dto.TaskDTO;
+import com.melashvili.employeemanager.model.lib.Task;
 import com.melashvili.employeemanager.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -32,19 +35,18 @@ public class TaskController {
         return new ResponseEntity<>(task, HttpStatus.OK);
     }
 
-    // under construction ...
-//    @PostMapping("/post/task")
-//    public void saveTask(@RequestBody Task task) {
-//
-//        MultipartFile multipartFile = task.getTaskFile();
-//
-//        taskService.saveTask(task);
-//    }
+    @PostMapping("/post/task")
+    public ResponseEntity<Void> saveTask(@RequestBody TaskDTO task,
+                         @RequestParam("file") MultipartFile file) throws IOException {
+        taskService.saveTask(task, file);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 
     @PutMapping("/put/task/{id}")
     public ResponseEntity<Void> updateTask (@PathVariable Long id,
-                                            @RequestBody TaskDTO task) {
-        taskService.updateTaskById(id, task);
+                                            @RequestBody TaskDTO task,
+                                            @RequestParam("updated_file") MultipartFile file) throws IOException {
+        taskService.updateTaskById(id, task, file);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
